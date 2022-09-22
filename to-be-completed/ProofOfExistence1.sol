@@ -1,4 +1,6 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier
+
+pragma solidity ^0.8.10;
 
 contract ProofOfExistence1 {
       // state
@@ -6,13 +8,14 @@ contract ProofOfExistence1 {
 
       // calculate and store the proof for a document
       // *transactional function*
-      function notarize(string memory document) public {
-        
+      function notarize(string memory _document) public {
+            proof = proofFor(_document);
       }
 
       // helper function to get a document's sha256
       // *read-only function*
-      function proofFor(string memory document) public pure returns (bytes32) {
+      function proofFor(string memory _document) internal pure returns (bytes32) {
+              return sha256(abi.encodePacked(_document));
       }
 
 }
